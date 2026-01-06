@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import pickle
 import pandas as pd
-from keras.models import load_model
+import tensorflow as tf
 import plotly.graph_objects as go
 import plotly.express as px
 from datetime import datetime
@@ -48,7 +48,7 @@ st.markdown("""
 # -------------------- LOAD ARTIFACTS --------------------
 @st.cache_resource
 def load_artifacts():
-    model = load_model("model.h5")
+    model =tf.keras.models.load_model('model.h5')
     with open("scaler.pkl", "rb") as f:
         scaler = pickle.load(f)
     with open("features.pkl", "rb") as f:
@@ -481,4 +481,5 @@ st.markdown("""
     <p>🔐 Secure Credit Risk Assessment | Built with ANN | Powered by Streamlit</p>
     <p>Last Updated: """ + datetime.now().strftime("%Y-%m-%d %H:%M") + """</p>
 </div>
+
 """, unsafe_allow_html=True)
